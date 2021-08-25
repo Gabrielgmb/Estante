@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,19 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  shelfs = [];
 
+  constructor(
+    private api: ApiService,
+  ) {
+
+  }
+
+  getAllCuisines(){
+    this.api.getAllShelf()
+    .then(data=>{
+      this.shelfs = data;
+      console.log(this.shelfs)
+    })
+  }
 }

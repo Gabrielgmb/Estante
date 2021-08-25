@@ -1,0 +1,73 @@
+
+ion-input{
+    --placeholder-color:var(--ion-color-gray);
+    --placeholder-opacity:1;
+}
+.login-logo {
+    text-align: center;
+    margin: auto;
+    right: 0px;
+    left: 0px;
+    img {
+        max-width: 150px;
+        width: 90px !important;
+    }
+}
+.login_form{
+    padding: 0 13vw ;
+    margin-top: 15px;
+    .title{
+        font-size: 1rem;
+        margin-bottom: 4px;
+    }
+    ion-item{
+        --background:var(--ion-color-light);
+        border-radius: 10px !important;
+        border: 1px solid var(--ion-color-primary);
+        margin-bottom: 10px;
+        --min-height:0;
+        font-size: 1rem;
+    }
+    .validate_text{
+        margin: 5px 0 10px 0;
+        font-size: 0.875rem;
+    } 
+}
+
+.createAcc{
+    text-align: center; 
+    margin-top:5px;
+    font-family: Bold!important;
+    .registerTag{
+        color: var(--ion-color-secondary);
+        font-family: Bold!important;
+    }
+} 
+
+.mandatory{
+    font-size: 0.75rem;
+    color: var(--ion-color-gray);
+    margin: 25px 0 40px 0;
+    padding: 0 13vw ;
+}
+
+@media only screen and (min-width: 600px) {
+    .login-logo {
+         img {
+            max-width: 200px;
+            width: 130px !important;
+        }
+    }
+    .login_form{
+        ion-item{
+            margin-top: 35px;
+        }
+        .validate_text{
+            margin: 10px 0 5px 0;
+        }
+    }
+    
+    .createAcc{
+        margin-top:10px;
+    } 
+}
