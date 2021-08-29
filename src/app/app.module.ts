@@ -8,7 +8,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
+
+import { Camera } from '@ionic-native/camera/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -24,11 +27,13 @@ import { environment } from 'src/environments/environment';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     NgxMaskIonicModule.forRoot(),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    Camera,
 
   ],
   bootstrap: [AppComponent],

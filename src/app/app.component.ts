@@ -12,8 +12,9 @@ export class AppComponent {
     private api: ApiService,
     private navCtrl: NavController,
   ) {
-    if(this.api.isLoggedIn()){
-      this.navCtrl.navigateRoot('/tabs');
+    console.log(localStorage.getItem('uid'))
+    if(!this.api.isLoggedIn()){
+      this.navCtrl.navigateRoot('/login');
     }
   }
 

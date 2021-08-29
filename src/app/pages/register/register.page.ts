@@ -52,7 +52,6 @@ export class RegisterPage implements OnInit {
         return false;
       }
       this.api.RegisterUser(this.register).then((userData) => {
-        localStorage.setItem('uid', userData.uid);
         this.router.navigate(['/tabs']);
       }).catch(err => {
         if (err) {

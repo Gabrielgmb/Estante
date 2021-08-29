@@ -17,7 +17,7 @@ const routes: Routes = [
       },
       {
         path: 'tab3',
-        loadChildren: () => import('../shelfs/shelfs.module').then(m => m.ShelfsPageModule)
+        loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
       },
       {
         path: '',

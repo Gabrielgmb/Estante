@@ -78,6 +78,17 @@
       }
     }
   }
+
+  .custom-loading{
+    .loading-wrapper{
+      background-color: transparent!important;
+      box-shadow: none;
+      ion-spinner{
+        height: 50px;
+        width: 50px;
+      }
+    }
+  }
   
   
   
