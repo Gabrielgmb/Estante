@@ -1,0 +1,77 @@
+ion-title{
+    text-align: center;
+}
+
+ion-input{
+    --placeholder-color:var(--ion-color-gray);
+    --placeholder-opacity:1;
+}
+.login-logo {
+    text-align: center;
+    margin: auto; 
+    right: 0px;
+    left: 0px;
+     img {
+        max-width: 150px;
+        width: 90px !important;
+    }
+}
+.login_form{
+    padding: 50px 13vw 0 13vw;
+    ion-item{
+        --background:var(--ion-background-color);
+        border-radius: 10px !important;
+        border: 1px solid var(--ion-color-primary);
+        margin-top: 25px;
+        --min-height:0;
+        font-size: 1rem;
+    }
+    .password{
+        --inner-padding-end:8px;
+        ion-icon{
+            padding-left: 10px;
+        }
+    }
+    .validate_text{
+        margin: 5px 0 10px 0;
+        font-size: 0.875rem;
+    }
+}
+
+.createAcc{
+    text-align: center; 
+    margin-top:5px;
+    font-family: Bold!important;
+    color: var(--ion-color-gray);
+    .registerTag{
+        color: var(--ion-color-secondary);
+        font-family: Bold!important;
+    }
+} 
+.frgTag{
+    text-align: center;
+    color:var(--ion-color-secondary);
+    font-size: 0.875rem;
+    font-family: Bold!important;
+}
+
+@media only screen and (min-width: 600px) {
+    .login-logo {
+         img {
+            max-width: 200px;
+            width: 130px !important;
+        }
+    }
+    .login_form{
+        ion-item{
+            margin-top: 35px;
+        }
+        .validate_text{
+            margin: 10px 0 5px 0;
+        }
+    }
+    
+    .createAcc{
+        margin-top:10px;
+    } 
+}

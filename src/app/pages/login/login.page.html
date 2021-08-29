@@ -1,9 +1,51 @@
-<ion-header>
+<ion-header mode="ios" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-buttons slot="start" >
+    </ion-buttons>
+    <ion-title color="primary" mode="md">Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <form class="login_form" #loginForm="ngForm" novalidate>
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="login.email" type="email" [placeholder]="('Email' ) || '&nbsp;'" name="email"
+          #email="ngModel" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="email.valid || submitted == false" class="validate_text">
+          É necessário o email
+        </p>
+      </ion-text>
+
+      <ion-item lines="none" class="password">
+        <ion-input [(ngModel)]="login.password" name="password" placeholder="Senha"
+        [type]="pwReavel==0 ? 'password' : 'text'" #password="ngModel" required>
+        </ion-input>
+        <ion-icon *ngIf="pwReavel==1" color="gray" (click)="changePassword(0)" name="eye-outline"></ion-icon>
+        <ion-icon *ngIf="pwReavel==0" color="gray" (click)="changePassword(1)" name="eye-off-outline"></ion-icon>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="validate_text">
+          É necessário a senha
+        </p>
+      </ion-text>
+
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        
+        <ion-button mode="md" class="btn-confirm" (click)="onLogin(loginForm)" type="submit" expand="block" [disabled]="isLogin">
+          <span *ngIf="!isLogin"> Login</span>
+          <ion-spinner name="circles" *ngIf="isLogin"></ion-spinner>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+  <p class="createAcc" (click)="register()">Você não tem uma conta?
+    <span class="registerTag">Cadastra-se</span>
+  </p>
 </ion-content>

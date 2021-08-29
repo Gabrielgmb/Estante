@@ -3,16 +3,14 @@
     <ion-buttons slot="start" >
       <ion-back-button color="primary" icon="chevron-back-outline" defaultHref="/" mode="md"></ion-back-button>
     </ion-buttons>
+    <ion-title color="primary" class="ion-no-padding" mode="md">Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="login-logo">
-    <img src="assets/imgs/png/logo-principal.png" class="logo_icon" alt="foodies">
-  </div>
 
   <form #loginForm="ngForm" novalidate class="login_form">
     <!--Nome Completo-->
-    <ion-label class="title">{{'Full Name'}}*</ion-label>
+    <ion-label class="title">Nome completo*</ion-label>
     <ion-item lines="none">
       <ion-input [(ngModel)]="register.name" type="text" name="full_name" #full_name="ngModel" 
       spellcheck="false" autocapitalize="off" required>
@@ -20,12 +18,12 @@
     </ion-item>
     <ion-text color="danger">
       <p [hidden]="full_name.valid || submitted == false"  class="validate_text">
-        {{'Name is required' }}
+        É necessário o nome
       </p>
     </ion-text>
 
     <!--Email-->
-    <ion-label class="title">{{'Email'}}*</ion-label>
+    <ion-label class="title">Email*</ion-label>
     <ion-item lines="none">
       <ion-input [(ngModel)]="register.email" type="email" name="email"
         #email="ngModel" spellcheck="false" autocapitalize="off" required>
@@ -33,26 +31,39 @@
     </ion-item>
     <ion-text color="danger">
       <p [hidden]="email.valid || submitted == false"  class="validate_text">
-        {{'Email is required' }}
-      </p>
+        É necessário o email
+      </p> 
+    </ion-text>
+
+    <!--Email-->
+    <ion-label class="title">Endereço*</ion-label>
+    <ion-item lines="none">
+      <ion-input [(ngModel)]="register.address" type="text" name="address"
+        #address="ngModel" spellcheck="false" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-text color="danger">
+      <p [hidden]="address.valid || submitted == false"  class="validate_text">
+        É necessário o endereço
+      </p> 
     </ion-text>
 
     <!--Telefone-->
-    <ion-label class="title">{{'Phone Number'}}*</ion-label>
+    <ion-label class="title">Numero de Telefone*</ion-label>
     <ion-item lines="none">
-      <ion-input [(ngModel)]="register.phone" mask="(00)00000-0000" type="tel" name="phone"
+      <ion-input [(ngModel)]="register.phone" mask="(00) 00000-0000"  minlength="15" maxlength="15" type="tel" name="phone"
         #phone="ngModel" spellcheck="false" autocapitalize="off" required>
       </ion-input>
     </ion-item>
 
     <ion-text color="danger">
       <p [hidden]="phone.valid || submitted == false"  class="validate_text">
-        {{'Phone is required' }}
+        É necessário o telefone
       </p>
     </ion-text>
 
     <!--Senha-->
-    <ion-label class="title">{{'password'}}*</ion-label>
+    <ion-label class="title">Senha*</ion-label>
     <ion-item lines="none">
       <ion-input [(ngModel)]="register.password" name="password"
         type="password" #password="ngModel" required>
@@ -61,11 +72,11 @@
 
     <ion-text color="danger">
       <p [hidden]="password.valid || submitted == false"  class="validate_text">
-        {{'Password is required' }}
+        É necessário a senha
       </p>
     </ion-text>
 
-    <ion-label class="title">{{'Confirm Password'}}*</ion-label>
+    <ion-label class="title">Confirmar Senha*</ion-label>
     <ion-item lines="none">
       <ion-input [(ngModel)]="register.confirmPassword" name="cpassword"
         type="password" #cpassword="ngModel" required>
@@ -74,22 +85,22 @@
 
     <ion-text color="danger">
       <p [hidden]="cpassword.valid || submitted == false"  class="validate_text">
-        {{'Confirm Password is required' }}
+        É necessário confirmar a senha
       </p>
     </ion-text>
 
     <ion-row class="ion-no-margin ion-no-padding">
       <ion-col class="ion-no-margin ion-no-padding">
         <ion-button mode="md" class="btn-confirm" (click)="onLogin(loginForm)" type="submit" expand="block" [disabled]="isLogin">
-          <span *ngIf="!isLogin"> {{'Sign up' }}</span>
+          <span *ngIf="!isLogin">Registrar</span>
           <ion-spinner name="circles" *ngIf="isLogin"></ion-spinner>
         </ion-button>
       </ion-col>
     </ion-row>
 
   </form>
-  <p class="createAcc" (click)="back()">{{'Already have an account' }}
-    <span class="registerTag">{{'Log In' }}.</span>
+  <p class="createAcc" (click)="login()">Já tenho uma conta.
+    <span class="registerTag">Logar-se.</span>
   </p>
   <p class="mandatory" >*Campos obrigatórios
   </p>
