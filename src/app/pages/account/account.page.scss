@@ -1,17 +1,16 @@
 .content_div{
-    padding: 46px 6.25vw 10px 6.25vw;
+    padding: 30px 6.25vw 10px 6.25vw;
     .perfil_img{
         height: 80px;
         width: 80px;
         background:transparent;
         border-radius: 50%;
-        position: relative;
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
     }
     .username{
-        font-size: 1.25rem;
+        font-size: 1rem;
         font-family: Bold !important;
     }
     .edit_btn{
@@ -20,22 +19,22 @@
         font-size: 0.875rem;
         font-family: Bold !important;
     }
-    .menu_div{
+    .data_user{
         margin-top: 40px;
-        .collapsible_div{
-            border-bottom: 1px solid var(--ion-color-gray-tint);
-            padding: 18px 0;
+        .data{
+            border-bottom: 1px solid lightgray;
+            padding: 10px 0 5px 0;
             font-size: 1rem;
-            display: flex;
-            align-items: center;
-            .main_icon{
-                font-size: 1.5rem;
-                margin-right: 8px;
-                color: var(--ion-color-primary);
+            color: gray;
+            .title{
+                font-family: Bold !important;
+                font-size: 0.875rem;
+                margin-bottom: 5px;
+                color: black;
             }
         }
-        .collapsible_div:last-child{
-            border-bottom: 0px solid var(--ion-color-gray-tint);
+        .data:last-child{
+            border-bottom: 0px;
         }
     }
 }

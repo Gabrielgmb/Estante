@@ -1,5 +1,5 @@
 export class User{
-    coverImage:string;
+    cover:string;
     email:string;
     name:string;
     phone:string;

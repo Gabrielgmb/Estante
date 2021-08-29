@@ -1,7 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth} from '@angular/fire/auth';
 import { AngularFirestore,AngularFirestoreDocument  } from '@angular/fire/firestore';
-import { User } from '../model/user.model';
 import { Router } from "@angular/router";
 import { UtilService } from 'src/app/services/util.service';
 
@@ -45,6 +44,17 @@ export class ApiService {
     });
   }
 
+  public getProfile() {
+    const uid = localStorage.getItem('uid');
+    return new Promise<any>((resolve, reject) => {
+      this.afStore.collection('users').doc(uid).get().subscribe((user: any) =>  {
+          resolve(user.data());
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
   // Login in with email/password
   public SignIn(login) {
     return new Promise<any>((resolve, reject) => {
@@ -63,6 +73,7 @@ export class ApiService {
     return new Promise<any>((resolve, reject) => {
       this.ngFireAuth.createUserWithEmailAndPassword(register.email, register.password).then(res => {
         this.afStore.collection('users').doc(res.user.uid).set({
+          cover:'',
           address:register.address,
           email: register.email,
           fcm_token: localStorage.getItem('fcm') ? localStorage.getItem('fcm') : '',
@@ -72,6 +83,7 @@ export class ApiService {
         }).catch(err => {
           reject(`erro ao registrar`)
         });
+        localStorage.setItem('uid', res.user.uid);
         resolve(res.user.uid);
       }).catch(err => {
         reject(`erro ao registrar`)
@@ -87,10 +99,20 @@ export class ApiService {
   }
 
   // Sign-out 
-  SignOut() {
-    return this.ngFireAuth.signOut().then(() => {
+  public SignOut() {
+    this.ngFireAuth.signOut().then(() => {
       localStorage.removeItem('uid');
       this.router.navigate(['login']);
     })
+  }
+
+  public updateProfile(uid, param): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.afStore.collection('users').doc(uid).update(param).then((data) => {
+        resolve(data);
+      }).catch(error => {
+        reject(error);
+      });
+    });
   }
 }
