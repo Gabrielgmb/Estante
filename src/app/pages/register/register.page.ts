@@ -11,7 +11,7 @@ import { NavController } from "@ionic/angular";
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  register = { email: '', password: '', name: '', confirmPassword: '',phone:'' };
+  register = { email: '', password: '', address: '', name: '', confirmPassword: '',phone:'' };
   submitted = false;
   isLogin: boolean = false;
   constructor(
@@ -51,18 +51,17 @@ export class RegisterPage implements OnInit {
         this.util.showToast('Password does not match', 'danger', 'bottom');
         return false;
       }
-      console.log(this.register)
-      this.api.register(this.register).then((userData) => {
+      this.api.RegisterUser(this.register).then((userData) => {
         localStorage.setItem('uid', userData.uid);
-
+        this.router.navigate(['/tabs']);
       }).catch(err => {
         if (err) {
           this.util.showToast(`${err}`, 'danger', 'bottom');
         }
-      }).then(el => this.isLogin = false);
+      })
     }
   }
-  back() {
-    this.navCtrl.back();
+  login() {
+    this.router.navigate(['/login']);
   }
 }

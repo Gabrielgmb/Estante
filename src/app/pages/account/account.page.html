@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="content_div">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4" class="ion-no-padding">
+        <div class="perfil_img" [defaultImage]="defaultImages.USER" [lazyLoad]="photo" [errorImage]="defaultImages.USER"></div>
+      </ion-col>
+      <ion-col size="8" class="ion-no-padding" (click)="goToEditProfile()">
+        <ion-label class="username">{{name}}</ion-label>
+        <ion-label  class="edit_btn">{{'Edit Profile' | translate}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <div class="menu_div">
+      <div class="collapsible_div" (click)="goToAddress()">
+        <span class="iconify main_icon" data-icon="jam:map-marker-f" data-inline="false"></span>
+        <span>{{'Manage Address' | translate}}</span>
+      </div>
+      <div class="collapsible_div" (click)="goToPayments()">
+        <span class="iconify main_icon" data-icon="jam:credit-card-f" data-inline="false"></span>
+        <span>{{'Payment methods' | translate}}</span>
+      </div>
+      <!--
+        <div class="collapsible_div" (click)="goToWallet()">
+          <span class="iconify main_icon" data-icon="jam:coin-f" data-inline="false"></span>
+          <span>{{'Wallet' | translate}}</span>
+        </div>
+      -->
+      <div class="collapsible_div" (click)="goToFavourites()">
+        <span class="iconify main_icon" data-icon="jam:heart-f" data-inline="false"></span>
+        <span>{{'Favourites' | translate}}</span>
+      </div>
+      <div class="collapsible_div" (click)="goToConfig()">
+        <span class="iconify main_icon" data-icon="jam:cog-f" data-inline="false"></span>
+        <span>Configurações</span>
+      </div>
+      <div class="collapsible_div" (click)="goToChat()">
+        <span class="iconify main_icon" data-icon="jam:message-writing-f" data-inline="false"></span>
+        <span>{{'Support' | translate}}</span>
+      </div>
+      <div class="collapsible_div" (click)="logout()"> 
+        <span class="iconify main_icon" data-icon="jam:log-out" data-inline="false"></span>
+        <span>{{'Logout' | translate}}</span>
+      </div>
+    </div>
+  </div>
+</ion-content>

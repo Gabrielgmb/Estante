@@ -1,34 +1,38 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Injectable, NgZone } from '@angular/core';
+import { AngularFireAuth} from '@angular/fire/auth';
+import { AngularFirestore,AngularFirestoreDocument  } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
-export class AuthInfo {
+import { Router } from "@angular/router";
+import { UtilService } from 'src/app/services/util.service';
 
-
-  constructor(public $uid: string) {
-
-  }
-
-  isLoggedIn() {
-    return !!this.$uid;
-  }
-}
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  static UNKNOWN_USER = new AuthInfo(null);
-  private authSubject: Subject<any>;
-  public authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(ApiService.UNKNOWN_USER);
+  userData:any;
+  
   constructor(
-    private fireAuth: AngularFireAuth,
-    private adb: AngularFirestore,
-  ) { }
+    public afStore: AngularFirestore,
+    public ngFireAuth: AngularFireAuth,
+    public router: Router,  
+    public ngZone: NgZone,
+    private util: UtilService,
+  ) {
+    this.ngFireAuth.authState.subscribe(user => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user'));
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
+      }
+    })
+   }
 
   public getAllShelf() {
     return new Promise<any>((resolve, reject) => {
-      this.adb.collection('shelf').get().subscribe((shelf) => {
+      this.afStore.collection('shelf').get().subscribe((shelf) => {
           let data = shelf.docs.map((element:any) => {
             let item = element.data();
             item.id = element.id;
@@ -41,71 +45,52 @@ export class ApiService {
     });
   }
 
-  public checkAuth() {
-    return new Promise((resolve, reject) => {
-      this.fireAuth.onAuthStateChanged(userSnapshot => {
-        if (userSnapshot) {
-          localStorage.setItem('uid', userSnapshot.uid);
-
-          let user: User = new User();
-          this.getMyProfile(userSnapshot.uid).then(async (data: any) => {
-            if (data) {
-              user.jwtToken = (await userSnapshot.getIdTokenResult()).token;
-              user.coverImage = data.coverImage;
-              user.email = data.email;
-              user.name = data.name;
-              user.phone = data.phone;
-              user.uid = data.uid
-              localStorage.setItem('userInfo', JSON.stringify(user));
-            }
-          }).catch(error => {
-          }).finally(() => {
-            resolve(user);
-          });
-        } else {
-          this.logout();
-          resolve(false);
-        }
+  // Login in with email/password
+  public SignIn(login) {
+    return new Promise<any>((resolve, reject) => {
+      this.ngFireAuth.signInWithEmailAndPassword(login.email, login.password).then(res => {
+        localStorage.setItem('uid', res.user.uid);
+        this.router.navigate(['/tabs']);
+      })
+      .catch(err => {
+        this.util.showToast(`Email ou senha incorretos`, 'danger', 'bottom');
       });
     });
   }
 
-  public getMyProfile(id): Promise<any> {
+  // Register user with email/password
+  public RegisterUser(register) {
     return new Promise<any>((resolve, reject) => {
-      this.adb.collection('users').doc(id).get().subscribe((users: any) => {
-        resolve(users.data());
-      }, error => {
-        reject(error);
-      });
-    });
-  }
-
-
-  public register(register): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this.fireAuth.createUserWithEmailAndPassword(register.email, register.password)
-        .then(res => {
-          if (res.user) {
-            this.adb.collection('users').doc(res.user.uid).set({
-              email: register.email,
-              name: register.name,
-              phone: register.phone,
-              uid: res.user.uid,
-            });
-            this.authInfo$.next(new AuthInfo(res.user.uid));
-            resolve(res.user);
-          }
-        })
-        .catch(err => {
-          this.authInfo$.next(ApiService.UNKNOWN_USER);
-          reject(`login failed ${err}`)
+      this.ngFireAuth.createUserWithEmailAndPassword(register.email, register.password).then(res => {
+        this.afStore.collection('users').doc(res.user.uid).set({
+          address:register.address,
+          email: register.email,
+          fcm_token: localStorage.getItem('fcm') ? localStorage.getItem('fcm') : '',
+          name: register.name,
+          phone: register.phone,
+          uid: res.user.uid
+        }).catch(err => {
+          reject(`erro ao registrar`)
         });
+        resolve(res.user.uid);
+      }).catch(err => {
+        reject(`erro ao registrar`)
+      });
     });
   }
 
-  public logout(): Promise<void> {
-    this.authInfo$.next(ApiService.UNKNOWN_USER);
-    // this.db.collection('users').doc(localStorage.getItem('uid')).update({ "fcm_token": firebase.firestore.FieldValue.delete() })
-    return this.fireAuth.signOut();
+
+  // Returns true when user is looged in
+  isLoggedIn(){
+    const uid = localStorage.getItem('uid');
+    return (uid !== null && uid) ? true : false;
+  }
+
+  // Sign-out 
+  SignOut() {
+    return this.ngFireAuth.signOut().then(() => {
+      localStorage.removeItem('uid');
+      this.router.navigate(['login']);
+    })
   }
 }
