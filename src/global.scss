@@ -24,3 +24,87 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+@font-face {
+    font-family: Regular;
+    src: url(assets/fonts/Louis-George-Cafe.ttf);
+  }
+  @font-face {
+    font-family: Bold;
+    src: url(assets/fonts/Louis-George-Cafe-Bold.ttf);
+  }
+  
+  *{
+      font-family: Regular;
+  }
+  ion-title{
+    font-family: Bold;
+    font-size: 1.125rem;
+    span{
+      font-family: Bold;
+    }
+  }
+  ion-input{
+    font-family: Regular!important;
+  }
+  ion-label{
+    font-family: Regular!important;
+    display: block;
+  }
+  ion-button{
+    text-transform: none;
+  }
+
+  .header-ios ion-toolbar:last-of-type {
+    --border-width: 0 ;
+  }
+  
+  ion-searchbar{
+    .searchbar-input-container{
+        .searchbar-input{
+            border: 1px solid var(--ion-color-primary);
+            border-radius: 10px;
+            background: var(--ion-color-light);
+            font-size: 0.875rem;
+        }
+    }
+  }
+  
+  ion-slides{
+    .swiper-pagination {
+      .swiper-pagination-bullet{
+        opacity: 1!important;
+      }
+    }
+  }
+
+  .custom-loading{
+    .loading-wrapper{
+      background-color: transparent!important;
+      box-shadow: none;
+      ion-spinner{
+        height: 50px;
+        width: 50px;
+      }
+    }
+  }
+  
+  
+  
+  .btn-confirm{
+    margin: 25px 0 ;
+    --box-shadow: none !important;
+    --border-radius:10px;
+    height: 41px;
+    min-width: 236px; 
+    font-size: 1rem;
+    font-family: Bold;
+    span{
+      font-family: Bold;
+    }
+    ion-icon{
+      margin-right: 5px;
+      font-size: 1rem;
+    }
+  }

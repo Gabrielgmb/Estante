@@ -1,0 +1,78 @@
+<div *ngIf="Myimage" class="cropper-back">
+  <div class="cropper_div">
+    <image-cropper 
+    [imageBase64]="Myimage"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="3 / 3"
+    [canvasRotation]="canvasRotation"
+    [transform]="transform"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    outputType="base64"
+    class="cropper"
+
+  ></image-cropper>
+  </div>
+
+
+  <ion-button (click)="clearCropper()" color="dark" fill="clear" class="btn-cancel-cropper">
+    Cancelar
+  </ion-button>
+  <ion-button (click)="rotateRight()" color="dark" fill="clear" class="btn-rotate-cropper">
+    <ion-icon name="refresh-circle-outline"></ion-icon>
+  </ion-button>
+  
+  <ion-button (click)="confirmCropper()" color="dark" fill="clear" class="btn-confirm-cropper">
+    Confirmar
+  </ion-button>
+</div>
+<ion-header mode="ios" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" icon="chevron-back-outline" defaultHref="/" mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary" class="ion-no-padding" mode="md">Editar perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content_div" *ngIf="user">
+      <div class="container-img">
+        <div class="perfil_img" (click)="cover()" [style.background-image]="'url('+user.cover+')'"></div>
+        <ion-fab (click)="cover()" horizontal="start" slot="fixed">
+          <ion-fab-button>
+            <span class="iconify" data-icon="jam:pencil-f" data-inline="false"></span>
+          </ion-fab-button>
+        </ion-fab>
+      </div>
+      
+      <div class="form_div">
+        <ion-item class="item-input ion-no-padding">
+          <ion-label mode="ios" position="stacked">Nome Completo</ion-label>
+          <ion-input type="text" [(ngModel)]="user.name"></ion-input>
+        </ion-item>
+
+        <ion-item class="item-input ion-no-padding">
+          <ion-label mode="ios" position="stacked">E-mail</ion-label>
+          <ion-input disabled type="text" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+      
+        <ion-item class="item-input ion-no-padding">
+          <ion-label mode="ios" position="stacked">Telefone</ion-label>
+          <ion-input type="tel" mask="(00)00000-0000" [(ngModel)]="user.phone"></ion-input>
+        </ion-item>
+
+        <ion-item class="item-input ion-no-padding">
+          <ion-label mode="ios" position="stacked">Telefone</ion-label>
+          <ion-input type="text"  [(ngModel)]="user.address"></ion-input>
+        </ion-item>
+
+      </div>
+      <ion-row class="ion-justify-content-center">
+        <ion-button (click)="update()" expand="block" class="btn-confirm">
+          Atualizar perfil
+        </ion-button>
+      </ion-row>
+
+  </div>
+</ion-content>

@@ -1,0 +1,59 @@
+.content_div{
+    padding: 30px 6.25vw 10px 6.25vw;
+    .perfil_img{
+        height: 80px;
+        width: 80px;
+        background:transparent;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .username{
+        font-size: 1rem;
+        font-family: Bold !important;
+    }
+    .edit_btn{
+        margin-top: 5px;
+        color: var(--ion-color-secondary);
+        font-size: 0.875rem;
+        font-family: Bold !important;
+    }
+    .data_user{
+        margin-top: 40px;
+        .data{
+            border-bottom: 1px solid lightgray;
+            padding: 10px 0 5px 0;
+            font-size: 1rem;
+            color: gray;
+            .title{
+                font-family: Bold !important;
+                font-size: 0.875rem;
+                margin-bottom: 5px;
+                color: black;
+            }
+        }
+        .data:last-child{
+            border-bottom: 0px;
+        }
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .content_div{
+        .perfil_img{
+            height: 120px!important;
+            width: 120px!important; 
+        }
+        .menu_div{
+            margin-top: 40px;
+            .collapsible_div{
+                padding: 20px 0;
+                .main_icon{
+                    margin-right: 12px;
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "estante-smd": {
+      "hosting": {
+        "app": [
+          "estante-smd"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="content_div" *ngIf="user">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4" class="ion-no-padding">
+        <div class="perfil_img" [style.background-image]="'url('+user.cover+')'" ></div>
+      </ion-col>
+      <ion-col size="8" class="ion-no-padding" (click)="goToEditProfile()">
+        <ion-label class="username">{{user.name}}</ion-label>
+        <ion-label  class="edit_btn">Editar perfil</ion-label>
+      </ion-col>
+    </ion-row>
+    <div class="data_user">
+      <div class="data" >
+        <ion-label class="title">E-mail</ion-label>
+        <span>{{user.email}}</span>
+      </div>
+      <div class="data">
+        <ion-label class="title">Endereço</ion-label>
+        <span>{{user.address}}</span>
+      </div>
+      <div class="data">
+        <ion-label class="title">Telefone</ion-label>
+        <span>{{user.phone}}</span>
+      </div>
+    </div>
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <ion-button mode="md" class="btn-confirm" (click)="logout()" type="submit" expand="block">
+          <span >Logout</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+  
+</ion-content>
