@@ -83,6 +83,13 @@
                 color: var(--ion-color-dark);
                 font-size: 1rem;
             }
+            ion-select{
+                color: var(--ion-color-dark);
+                font-size: 1rem;
+            }
+            ion-select::part(icon) {
+                display: none !important;
+            }
             ion-label{
                 color: var(--ion-color-dark);
                 font-family: Bold!important;
