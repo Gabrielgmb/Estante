@@ -41,24 +41,18 @@
 
 .content_div{
     padding: 16px 6.25vw;
-    .perfil_img{
-        height: 120px;
-        width: 120px;
-        background:transparent;
-        border-radius: 50%;
-        position: relative;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
     ion-label{
         color: var(--ion-color-gray);
     }
-    .container-img{
+    .img-container{
         position: relative;
         display: flex;
         justify-content: center;
+        img{
+            border-radius: 15px;
+            width: 45%;
+            border: 2px solid  var(--ion-color-primary);
+        }
         ion-fab{
             bottom: 0px;
             left: 58%;
@@ -82,6 +76,13 @@
             ion-input{
                 color: var(--ion-color-dark);
                 font-size: 1rem;
+            }
+            ion-select{
+                color: var(--ion-color-dark);
+                font-size: 1rem;
+            }
+            ion-select::part(icon) {
+                display: none !important;
             }
             ion-label{
                 color: var(--ion-color-dark);
