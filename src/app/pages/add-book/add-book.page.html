@@ -15,14 +15,14 @@
   </div>
 
 
-  <ion-button (click)="clearCropper()" color="dark" fill="clear" class="btn-cancel-cropper">
+  <ion-button (click)="clearCropper()" color="light" fill="clear" class="btn-cancel-cropper">
     Cancelar
   </ion-button>
-  <ion-button (click)="rotateRight()" color="dark" fill="clear" class="btn-rotate-cropper">
+  <ion-button (click)="rotateRight()" color="light" fill="clear" class="btn-rotate-cropper">
     <ion-icon name="refresh-circle-outline"></ion-icon>
   </ion-button>
   
-  <ion-button (click)="confirmCropper()" color="dark" fill="clear" class="btn-confirm-cropper">
+  <ion-button (click)="confirmCropper()" color="light" fill="clear" class="btn-confirm-cropper">
     Confirmar
   </ion-button>
 </div>
@@ -31,56 +31,49 @@
     <ion-buttons slot="start">
       <ion-back-button color="primary" icon="chevron-back-outline" defaultHref="/" mode="md"></ion-back-button>
     </ion-buttons>
-    <ion-title color="primary" class="ion-no-padding" mode="md">Editar perfil</ion-title>
+    <ion-title color="primary" class="ion-no-padding" mode="md">{{from=='new'?'Novo livro':'Editar livro'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="content_div">
-      <div class="container-img">
-        <div class="perfil_img" (click)="cover()" [ngStyle]="{'background-image': book ? 'url('+book.cover+')' : '' }"></div>
-        <ion-fab (click)="cover()" horizontal="start" slot="fixed">
-          <ion-fab-button>
-            <span class="iconify" data-icon="jam:pencil-f" data-inline="false"></span>
-          </ion-fab-button>
-        </ion-fab>
+      <div class="img-container" (click)="cover()">
+        <img [src]="book.cover"/>
       </div>
       
       <div class="form_div">
         <ion-item class="item-input ion-no-padding">
           <ion-label mode="ios" position="stacked">Nome</ion-label>
-          <ion-input type="text" [(ngModel)]="book.name"></ion-input>
+          <ion-input type="text" placeholder="nome do livro" [(ngModel)]="book.name"></ion-input>
         </ion-item>
 
         <ion-item class="item-input ion-no-padding">
           <ion-label mode="ios" position="stacked">Preço de venda</ion-label>
-          <ion-input type="number" [(ngModel)]="book.sell"></ion-input>
+          <ion-input type="number" placeholder="Preço de venda do livro" [(ngModel)]="book.sell"></ion-input>
         </ion-item>
       
         <ion-item class="item-input ion-no-padding">
           <ion-label mode="ios" position="stacked">Preço de compra</ion-label>
-          <ion-input type="number" [(ngModel)]="book.buy"></ion-input>
+          <ion-input type="number" placeholder="Preço de compra do livro" [(ngModel)]="book.buy"></ion-input>
         </ion-item>
 
         <ion-item class="item-input ion-no-padding">
           <ion-label mode="ios" position="stacked">Categoria</ion-label>
-          <ion-select placeholder="Bandeira do cartão" interface="popover" [(ngModel)]="book.cid">
-            <ion-select-option value="aaaaa">Terror</ion-select-option>
-            <ion-select-option value="bbbbb">Ação</ion-select-option>
+          <ion-select placeholder="categoria do livro" interface="popover" [(ngModel)]="book.cid">
+            <ion-select-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-select-option>
           </ion-select>
         </ion-item>
 
         <ion-item class="item-input ion-no-padding">
-          <ion-label mode="ios" position="stacked">desc</ion-label>
-          <ion-input type="text" [(ngModel)]="book.desc"></ion-input>
+          <ion-label mode="ios" position="stacked">Descrição</ion-label>
+          <ion-input type="text" placeholder="Descrição do livro" [(ngModel)]="book.desc"></ion-input>
         </ion-item>
 
       </div>
       <ion-row class="ion-justify-content-center">
         <ion-button (click)="create()" expand="block" class="btn-confirm">
-          Atualizar perfil
+          {{from=='new'?'Salvar livro':'Editar livro'}}
         </ion-button>
       </ion-row>
-
   </div>
 </ion-content>

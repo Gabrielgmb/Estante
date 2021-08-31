@@ -29,21 +29,6 @@ export class ApiService {
     })
    }
 
-  public getAllShelf() {
-    return new Promise<any>((resolve, reject) => {
-      this.afStore.collection('shelf').get().subscribe((shelf) => {
-          let data = shelf.docs.map((element:any) => {
-            let item = element.data();
-            item.id = element.id;
-            return item;
-          });
-          resolve(data);
-        }, error => {
-          reject(error);
-        });
-    });
-  }
-
   public getProfile() {
     const uid = localStorage.getItem('uid');
     return new Promise<any>((resolve, reject) => {
@@ -116,9 +101,57 @@ export class ApiService {
     });
   }
 
+  public getCategories() {
+    return new Promise<any>((resolve, reject) => {
+      this.afStore.collection('categories').get().subscribe((cat) => {
+          let data = cat.docs.map((element:any) => {
+            let item = element.data();
+            return item;
+          });
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+  public getBookById(uid,id): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      this.afStore.collection('books').doc(uid).collection('all').doc(id).get().subscribe(async (order: any) => {
+        let data = await order.data();
+        resolve(data);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
   public addBook(uid, param): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.afStore.collection('books').doc(uid).collection('all').doc(param.id).set(param).then((data) => {
+        resolve(data);
+      }, error => {
+        reject(error);
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
+  public updateBook(uid, param): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.afStore.collection('books').doc(uid).collection('all').doc(param.id).update(param).then((data) => {
+        resolve(data);
+      }, error => {
+        reject(error);
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
+  public deleteBook(uid, id): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.afStore.collection('books').doc(uid).collection('all').doc(id).delete().then((data) => {
         resolve(data);
       }, error => {
         reject(error);

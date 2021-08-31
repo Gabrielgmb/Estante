@@ -9,10 +9,15 @@
           </ion-row>
 
           <ion-row class="books">
-            <ion-col size=6 class="book ion-no-padding"  *ngFor="let book of books">
+            <ion-col size=6 class="book ion-no-padding"  *ngFor="let book of books;let i = index">
                 <div class="img-container">
                   <img [src]="book.cover"/>
+                  <ion-icon class="moreIcon" (click)="openMenu(book.id,$event,i)"  color="primary" name="ellipsis-vertical"></ion-icon>    
+                  <button class="add_button" (click)="share(book.id)">
+                    <ion-icon name="share-social"></ion-icon>
+                  </button> 
                 </div>
+              
                 <ion-label class="book_price">R$ {{formatPrice(book.sell)}}</ion-label>
                 <ion-label class="book_name">{{book.name}}</ion-label>
                 <ion-text class="book_desc">{{book.desc}}</ion-text>

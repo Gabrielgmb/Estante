@@ -33,6 +33,14 @@ const routes: Routes = [
   {
     path: 'add-book',
     loadChildren: () => import('./pages/add-book/add-book.module').then( m => m.AddBookPageModule)
+  },
+  {
+    path: 'qrcode',
+    loadChildren: () => import('./pages/qrcode/qrcode.module').then( m => m.QrcodePageModule)
+  },
+  {
+    path: 'reader',
+    loadChildren: () => import('./pages/reader/reader.module').then( m => m.ReaderPageModule)
   }
 ]; 
 @NgModule({

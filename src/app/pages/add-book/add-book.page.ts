@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { UtilService } from 'src/app/services/util.service';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Book } from '../../model/book.model';
@@ -16,14 +16,16 @@ import { Dimensions, ImageTransform } from 'ngx-image-cropper';
 export class AddBookPage implements OnInit {
   Myimage =null;
   croppedImage = null;
+  from:string;
   book:Book = {
-    cover: '',
+    cover: 'assets/add-book-icon.jpg',
     cid: '',
     name:'',
     buy:0,
     sell:0,
     desc:'',
     id:'' };
+  categories:any;
   canvasRotation = 0;
   rotation = 0;
   transform: ImageTransform = {};
@@ -35,35 +37,82 @@ export class AddBookPage implements OnInit {
     private actionSheetController: ActionSheetController,
     private camera: Camera,
     private router: Router,
+    private route: ActivatedRoute,
   ) {
+    this.route.queryParams.subscribe(data => {
+      if (data && data.from) {
+        this.from = 'edit';
+       this.book.id =data.id;
+       this.getbook();
+      } else {
+        this.from = 'new';
+      }
+    });
   }
 
   
   ngOnInit() {
+    this.getCategories();
+  }
 
+  getCategories(){
+    this.api.getCategories().then((cat: any) => {
+     this.categories = cat;
+    }).catch(error => {
+      console.log(error);
+      this.util.showToast('Algo deu errado', 'danger', 'bottom');
+    });
+  }
+
+  getbook(){
+    this.api.getBookById(localStorage.getItem('uid'),this.book.id).then((book: any) => {
+      console.log(book)
+      this.book = book;
+    }).catch(error => {
+      console.log(error);
+      this.util.showToast('Algo deu errado', 'danger', 'bottom');
+    });
   }
 
   create() {
-    if (this.book.name === '' || this.book.cover === '' || this.book.cid === '' || this.book.buy === 0 || this.book.sell === 0 || this.book.desc === '' ||
-    !this.book.name ||!this.book.cover ||!this.book.cid ||!this.book.buy ||!this.book.sell ||!this.book.desc ) {
+    if (this.book.name === '' ||  this.book.cid === '' || this.book.buy === 0 || this.book.sell === 0 || this.book.desc === '' ||
+    !this.book.name ||!this.book.cid ||!this.book.buy ||!this.book.sell ||!this.book.desc ) {
     this.util.showToast('Todos os campos são obrigatorios', 'danger', 'bottom');
     return false;
     }
-    this.book.id = this.util.makeid(15);
-    this.util.show();
-    this.api.addBook(localStorage.getItem('uid'), this.book).then((data: any) => {
-      this.util.hide();
-      this.util.showToast('Livro adicionado com sucesso', 'success', 'bottom');
-      this.router.navigate(['/tabs/tab1']);
-    }, error => {
-      console.log(error);
-      this.util.hide();
-      this.util.showToast('Algo deu errado', 'danger', 'bottom');
-    }).catch(error => {
-      console.log(error);
-      this.util.hide();
-      this.util.showToast('Algo deu errado', 'danger', 'bottom');
-    });
+    if(this.from =='new'){
+      this.book.id = this.util.makeid(15);
+
+      this.util.show();
+      this.api.addBook(localStorage.getItem('uid'), this.book).then((data: any) => {
+        this.util.hide();
+        this.util.showToast('Livro adicionado com sucesso', 'success', 'bottom');
+        this.router.navigate(['/tabs/tab1']);
+      }, error => {
+        console.log(error);
+        this.util.hide();
+        this.util.showToast('Algo deu errado', 'danger', 'bottom');
+      }).catch(error => {
+        console.log(error);
+        this.util.hide();
+        this.util.showToast('Algo deu errado', 'danger', 'bottom');
+      });
+    }else if(this.from =='edit'){
+      this.api.updateBook(localStorage.getItem('uid'), this.book).then((data: any) => {
+        this.util.hide();
+        this.util.showToast('Livro editado com sucesso', 'success', 'bottom');
+        this.router.navigate(['/tabs/tab1']);
+      }, error => {
+        console.log(error);
+        this.util.hide();
+        this.util.showToast('Algo deu errado', 'danger', 'bottom');
+      }).catch(error => {
+        console.log(error);
+        this.util.hide();
+        this.util.showToast('Algo deu errado', 'danger', 'bottom');
+      });
+    }
+
   }
 
   async cover() {
