@@ -1,0 +1,35 @@
+<ion-header mode="ios" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" icon="chevron-back-outline" defaultHref="/" mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary" class="ion-no-padding" mode="md">Compartilhar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content_div">
+    <div class="qrcode_div">
+      <qrcode [qrdata]="qrcode" [width]="300" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+    <div class="code" (click)="copyCode()">
+      {{qrcode}}
+      <span class="iconify" data-icon="jam:files"></span></div>
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <ion-button mode="md" class="btn-confirm" (click)="copyCode()" type="submit" expand="block">
+          <span >Copiar código</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <ion-button mode="md" fill="clear" color="secondary" class="btn-confirm share-button" (click)="addBook()" type="submit" expand="block">
+          <span >Compartilhar código</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  
+</ion-content>

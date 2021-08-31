@@ -89,8 +89,29 @@
       }
     }
   }
-  
-  
+
+  .even-menu-popover {
+    --width: auto;
+    .popover-arrow.sc-ion-popover-ios {
+      display: none;
+    }
+    .popover-content.sc-ion-popover-ios {
+      transform: translate(-48%, -11%) !important;
+      border-radius: 10px 0 10px 10px;
+      border: 1px solid var(--ion-color-primary);
+    }
+  }
+  .odd-menu-popover {
+    --width: auto;
+    .popover-arrow.sc-ion-popover-ios {
+      display: none;
+    }
+    .popover-content.sc-ion-popover-ios {
+      transform: translate(-37%, -11%) !important;
+      border-radius: 10px 0 10px 10px;
+      border: 1px solid var(--ion-color-primary);
+    }
+  }
   
   .btn-confirm{
     margin: 25px 0 ;

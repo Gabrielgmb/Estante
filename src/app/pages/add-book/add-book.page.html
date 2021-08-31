@@ -1,0 +1,79 @@
+<div *ngIf="Myimage" class="cropper-back">
+  <div class="cropper_div">
+    <image-cropper 
+    [imageBase64]="Myimage"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="3 / 3"
+    [canvasRotation]="canvasRotation"
+    [transform]="transform"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    outputType="base64"
+    class="cropper"
+
+  ></image-cropper>
+  </div>
+
+
+  <ion-button (click)="clearCropper()" color="light" fill="clear" class="btn-cancel-cropper">
+    Cancelar
+  </ion-button>
+  <ion-button (click)="rotateRight()" color="light" fill="clear" class="btn-rotate-cropper">
+    <ion-icon name="refresh-circle-outline"></ion-icon>
+  </ion-button>
+  
+  <ion-button (click)="confirmCropper()" color="light" fill="clear" class="btn-confirm-cropper">
+    Confirmar
+  </ion-button>
+</div>
+<ion-header mode="ios" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" icon="chevron-back-outline" defaultHref="/" mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary" class="ion-no-padding" mode="md">{{from=='new'?'Novo livro':'Editar livro'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content_div">
+      <div class="img-container" (click)="cover()">
+        <img [src]="book.cover"/>
+      </div>
+      
+      <div class="form_div">
+        <ion-item class="item-input ion-no-padding">
+          <ion-label mode="ios" position="stacked">Nome</ion-label>
+          <ion-input type="text" placeholder="nome do livro" [(ngModel)]="book.name"></ion-input>
+        </ion-item>
+
+        <ion-item class="item-input ion-no-padding">
+          <ion-label mode="ios" position="stacked">Preço de venda</ion-label>
+          <ion-input type="number" placeholder="Preço de venda do livro" [(ngModel)]="book.sell"></ion-input>
+        </ion-item>
+      
+        <ion-item class="item-input ion-no-padding">
+          <ion-label mode="ios" position="stacked">Preço de compra</ion-label>
+          <ion-input type="number" placeholder="Preço de compra do livro" [(ngModel)]="book.buy"></ion-input>
+        </ion-item>
+
+        <ion-item class="item-input ion-no-padding">
+          <ion-label mode="ios" position="stacked">Categoria</ion-label>
+          <ion-select placeholder="categoria do livro" interface="popover" [(ngModel)]="book.cid">
+            <ion-select-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="item-input ion-no-padding">
+          <ion-label mode="ios" position="stacked">Descrição</ion-label>
+          <ion-input type="text" placeholder="Descrição do livro" [(ngModel)]="book.desc"></ion-input>
+        </ion-item>
+
+      </div>
+      <ion-row class="ion-justify-content-center">
+        <ion-button (click)="create()" expand="block" class="btn-confirm">
+          {{from=='new'?'Salvar livro':'Editar livro'}}
+        </ion-button>
+      </ion-row>
+  </div>
+</ion-content>

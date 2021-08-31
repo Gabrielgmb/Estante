@@ -25,7 +25,6 @@ export class EditAccountPage implements OnInit {
   constructor(
     private api: ApiService,
     private util: UtilService,
-
     private actionSheetController: ActionSheetController,
     private camera: Camera,
     private router: Router,

@@ -29,6 +29,18 @@ const routes: Routes = [
   {
     path: 'edit-account',
     loadChildren: () => import('./pages/edit-account/edit-account.module').then( m => m.EditAccountPageModule)
+  },
+  {
+    path: 'add-book',
+    loadChildren: () => import('./pages/add-book/add-book.module').then( m => m.AddBookPageModule)
+  },
+  {
+    path: 'qrcode',
+    loadChildren: () => import('./pages/qrcode/qrcode.module').then( m => m.QrcodePageModule)
+  },
+  {
+    path: 'reader',
+    loadChildren: () => import('./pages/reader/reader.module').then( m => m.ReaderPageModule)
   }
 ]; 
 @NgModule({

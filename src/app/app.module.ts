@@ -10,6 +10,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
+import { QRCodeModule } from 'angularx-qrcode';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx' 
 
 import { Camera } from '@ionic-native/camera/ngx';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,11 +32,14 @@ import { environment } from 'src/environments/environment';
     AngularFirestoreModule,
     AngularFireStorageModule,
     NgxMaskIonicModule.forRoot(),
+    QRCodeModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFirestoreModule,
     Camera,
+    Clipboard,
+    SocialSharing,
 
   ],
   bootstrap: [AppComponent],
