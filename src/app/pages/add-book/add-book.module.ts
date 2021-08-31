@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AddBookPageRoutingModule } from './add-book-routing.module';
 
 import { AddBookPage } from './add-book.page';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddBookPageRoutingModule
+    AddBookPageRoutingModule,
+    ImageCropperModule,
   ],
   declarations: [AddBookPage]
 })

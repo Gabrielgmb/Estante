@@ -115,4 +115,20 @@ export class ApiService {
       });
     });
   }
+
+  public addBook(uid, param): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.afStore.collection('books').doc(uid).collection('all').doc(param.id).set(param).then((data) => {
+        resolve(data);
+      }, error => {
+        reject(error);
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
+  public listenBooks(id: string) {
+    return this.afStore.collection('books').doc(id).collection('all').stateChanges();
+  }
 }

@@ -1,3 +1,23 @@
 <ion-content>
+    <div class="div_content">
+        <ion-row class="ion-no-margin ion-no-padding">
+            <ion-col class="ion-no-margin ion-no-padding">
+              <ion-button mode="md" class="btn-confirm" (click)="addBook()" type="submit" expand="block">
+                <span >Adicionar livro</span>
+              </ion-button>
+            </ion-col>
+          </ion-row>
 
+          <ion-row class="books">
+            <ion-col size=6 class="book ion-no-padding"  *ngFor="let book of books">
+                <div class="img-container">
+                  <img [src]="book.cover"/>
+                </div>
+                <ion-label class="book_price">R$ {{formatPrice(book.sell)}}</ion-label>
+                <ion-label class="book_name">{{book.name}}</ion-label>
+                <ion-text class="book_desc">{{book.desc}}</ion-text>
+            </ion-col>
+          </ion-row>
+    </div>
+    
 </ion-content>

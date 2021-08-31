@@ -54,16 +54,17 @@
 
         <ion-item class="item-input ion-no-padding">
           <ion-label mode="ios" position="stacked">Preço de venda</ion-label>
-          <ion-input type="tel" [(ngModel)]="book.email"></ion-input>
+          <ion-input type="number" [(ngModel)]="book.sell"></ion-input>
         </ion-item>
       
         <ion-item class="item-input ion-no-padding">
           <ion-label mode="ios" position="stacked">Preço de compra</ion-label>
-          <ion-input type="tel" mask="(00)00000-0000" [(ngModel)]="book.phone"></ion-input>
+          <ion-input type="number" [(ngModel)]="book.buy"></ion-input>
         </ion-item>
 
         <ion-item class="item-input ion-no-padding">
-          <ion-select placeholder="Bandeira do cartão" interface="popover" [(ngModel)]="card.cid">
+          <ion-label mode="ios" position="stacked">Categoria</ion-label>
+          <ion-select placeholder="Bandeira do cartão" interface="popover" [(ngModel)]="book.cid">
             <ion-select-option value="aaaaa">Terror</ion-select-option>
             <ion-select-option value="bbbbb">Ação</ion-select-option>
           </ion-select>
@@ -71,7 +72,7 @@
 
         <ion-item class="item-input ion-no-padding">
           <ion-label mode="ios" position="stacked">desc</ion-label>
-          <ion-input type="text" [(ngModel)]="book.address"></ion-input>
+          <ion-input type="text" [(ngModel)]="book.desc"></ion-input>
         </ion-item>
 
       </div>
