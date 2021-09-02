@@ -65,4 +65,8 @@ export class BookPage implements OnInit {
     });
   }
 
+  formatPrice(value) {
+    return this.util.formatPrice(value);
+  }
+
 }

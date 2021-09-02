@@ -9,7 +9,7 @@
     <ion-label class="ou">OU</ion-label>
   
     <ion-item class="item-input ion-no-padding">
-      <ion-input type="text" placeholder="Coloque o código do livro aqui" [(ngModel)]="qrcode"></ion-input>
+      <ion-input type="text" clearOnEdit="true" placeholder="Coloque o código do livro aqui" [(ngModel)]="qrcode"></ion-input>
     </ion-item>
     <ion-row class="ion-justify-content-center">
       <ion-button (click)="getBook(qrcode)" [disabled]="!qrcode" color="secondary" class="btn-confirm">
