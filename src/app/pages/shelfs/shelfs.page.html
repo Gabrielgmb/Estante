@@ -1,26 +1,29 @@
 <ion-content>
     <div class="div_content">
-        <ion-row class="ion-no-margin ion-no-padding">
-            <ion-col class="ion-no-margin ion-no-padding">
-              <ion-button mode="md" class="btn-confirm" (click)="addBook()" type="submit" expand="block">
+        <ion-row class="ion-justify-content-center">
+              <ion-button mode="md" class="btn-confirm" (click)="addBook()">
+                <span class="iconify" data-icon="jam:plus"></span>
                 <span >Adicionar livro</span>
               </ion-button>
-            </ion-col>
           </ion-row>
-
-          <ion-row class="books">
+          <div class="pre_load" *ngIf="preLoad">
+            <ion-spinner color="primary"></ion-spinner>
+          </div>
+          <ion-row class="books" *ngIf="!preLoad">
             <ion-col size=6 class="book ion-no-padding"  *ngFor="let book of books;let i = index">
                 <div class="img-container">
-                  <img [src]="book.cover"/>
+                  <img [src]="book.cover" (click)="getBook(book.id)" />
                   <ion-icon class="moreIcon" (click)="openMenu(book.id,$event,i)"  color="primary" name="ellipsis-vertical"></ion-icon>    
                   <button class="add_button" (click)="share(book.id)">
                     <ion-icon name="share-social"></ion-icon>
                   </button> 
                 </div>
-              
-                <ion-label class="book_price">R$ {{formatPrice(book.sell)}}</ion-label>
-                <ion-label class="book_name">{{book.name}}</ion-label>
-                <ion-text class="book_desc">{{book.desc}}</ion-text>
+                <div (click)="getBook(book.id)">
+                  <ion-label class="book_price">R$ {{formatPrice(book.sell)}}</ion-label>
+                  <ion-label class="book_name">{{book.name}}</ion-label>
+                  <ion-text class="book_desc">{{book.desc}}</ion-text>
+                </div>
+                
             </ion-col>
           </ion-row>
     </div>

@@ -23,37 +23,45 @@ export class ShelfsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.books =[];
+  }
+
+  ionViewWillEnter() {
     this.listenBooks();
   }
 
   listenBooks(){
-    this.api.listenBooks(localStorage.getItem('uid')).subscribe(async books =>{
+    this.api.listenBooks().subscribe(async books =>{
       const promise = books.map((book: any)=>{
+        var type =book.type
         book = book.payload.doc.data();
+        book.type = type
         return book;
       });
-      this.processVenues(promise);
-        console.log(promise)
+      if(books.length===1){
+        this.processBooks(promise);
+      }else{
+        this.books =promise
+      }
+      this.preLoad=false;
+      console.log(promise)
     },err =>{
       console.error(err);
     })
   }
 
-  async processVenues(books) {
-    const filter = this.books.filter(function(book){ 
-      const index = books.findIndex(element => book.id === element.id);
-      if(index > -1){
-        return book;
-      }
-    });
-    this.books=filter;
-
+  async processBooks(books) {
     const promise = books.map(book => {
       const index = this.books.findIndex(element => element.id === book.id);
-      if (index > -1)
-        this.books[index] = book;
-      else
-        this.books.push(book);
+      if(book.type !=="removed"){
+        if (index > -1)
+          this.books[index] = book;
+        else
+          this.books.push(book);
+      }else{
+        if (index > -1)
+          this.books.splice(index, 1);
+      }
     });
     this.preLoad=false;
     await Promise.all(promise);
@@ -103,6 +111,16 @@ export class ShelfsPage implements OnInit {
       }
     };
     this.router.navigate(['qrcode'], navData);
+  }
+
+  getBook(id){
+      const navData: NavigationExtras = {
+        queryParams: {
+          uid: localStorage.getItem('uid'),
+          id:id
+        }
+      };
+      this.router.navigate(['book'], navData);
   }
 
   addBook() {

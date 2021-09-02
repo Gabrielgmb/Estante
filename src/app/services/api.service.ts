@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth} from '@angular/fire/auth';
-import { AngularFirestore,AngularFirestoreDocument  } from '@angular/fire/firestore';
+import { AngularFirestore  } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
 import { UtilService } from 'src/app/services/util.service';
 
@@ -9,7 +9,6 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class ApiService {
   userData:any;
-  
   constructor(
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
@@ -125,6 +124,17 @@ export class ApiService {
     });
   }
 
+  public getCategoryById(id): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      this.afStore.collection('categories').doc(id).get().subscribe(async (order: any) => {
+        let data = await order.data();
+        resolve(data);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
   public addBook(uid, param): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.afStore.collection('books').doc(uid).collection('all').doc(param.id).set(param).then((data) => {
@@ -161,7 +171,8 @@ export class ApiService {
     });
   }
 
-  public listenBooks(id: string) {
-    return this.afStore.collection('books').doc(id).collection('all').stateChanges();
+  public listenBooks() {
+    const uid = localStorage.getItem('uid');
+    return this.afStore.collection('books').doc(uid).collection('all').stateChanges();
   }
 }

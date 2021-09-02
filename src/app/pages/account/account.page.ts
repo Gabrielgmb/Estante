@@ -3,8 +3,7 @@ import { NavController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 import { User } from '../../model/user.model';
 import { UtilService } from 'src/app/services/util.service';
-import { Router } from "@angular/router";
-
+import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
@@ -17,8 +16,13 @@ export class AccountPage implements OnInit {
     private navCtrl: NavController,
     private util: UtilService,
     private router: Router,
+    private route: ActivatedRoute,
   ) { 
-    
+    this.route.queryParams.subscribe(data => {
+      if (data && data.type) {
+        this.getProfile();
+      } 
+    });
   }
 
   ngOnInit() {

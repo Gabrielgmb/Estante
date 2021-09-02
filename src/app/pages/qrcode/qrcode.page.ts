@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
-import { UtilService } from 'src/app/services/util.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx'
@@ -13,7 +11,6 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx'
 export class QrcodePage implements OnInit {
   qrcode:string
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private clipboard: Clipboard,
     private socialSharing: SocialSharing
@@ -32,10 +29,10 @@ export class QrcodePage implements OnInit {
   }
 
   share(){
-    this.socialSharing.share('qrcode');
+    this.socialSharing.share(this.qrcode);
   }
 
   copyCode(){
-    this.clipboard.copy('Hello world');
+    this.clipboard.copy(this.qrcode);
   }
 }
