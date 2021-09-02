@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { UtilService } from 'src/app/services/util.service';
-import { Router } from "@angular/router";
+import { Router,NavigationExtras } from "@angular/router";
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { User } from '../../model/user.model';
@@ -60,7 +60,12 @@ export class EditAccountPage implements OnInit {
     this.api.updateProfile(localStorage.getItem('uid'), this.user).then((data: any) => {
       this.util.hide();
       this.util.showToast('Perfil atualizado com sucesso', 'success', 'bottom');
-      this.router.navigate(['/tabs/tab3']);
+      const navData: NavigationExtras = {
+        queryParams: {
+          type:'load'
+        }
+      };
+      this.router.navigate(['/tabs/tab3'], navData);
     }, error => {
       console.log(error);
       this.util.hide();

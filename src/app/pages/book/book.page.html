@@ -1,0 +1,38 @@
+<ion-header mode="ios" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" icon="chevron-back-outline" defaultHref="/" mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary" class="ion-no-padding" mode="md">Livro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content_div" *ngIf="category">
+      <div class="img-container">
+        <img [src]="book.cover"/>
+      </div>
+      <div class="data_book">
+        <div class="data" >
+          <ion-label class="title">Nome</ion-label>
+          <span>{{book.name}}</span>
+        </div>
+        <div class="data">
+          <ion-label class="title">Preço de venda</ion-label>
+          <span>{{formatPrice(book.sell)}}</span>
+        </div>
+        <div class="data">
+          <ion-label class="title">Preço de compra</ion-label>
+          <span>{{formatPrice(book.buy)}}</span>
+        </div>
+        <div class="data">
+          <ion-label class="title">Categoria</ion-label>
+          <span>{{category.name}}</span>
+        </div>
+        <div class="data">
+          <ion-label class="title">Descrição</ion-label>
+          <span>{{book.desc}}</span>
+        </div>
+      </div>
+  </div>
+</ion-content>

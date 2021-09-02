@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'reader',
     loadChildren: () => import('./pages/reader/reader.module').then( m => m.ReaderPageModule)
+  },
+  {
+    path: 'book',
+    loadChildren: () => import('./pages/book/book.module').then( m => m.BookPageModule)
   }
 ]; 
 @NgModule({

@@ -13,6 +13,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { QRCodeModule } from 'angularx-qrcode';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx' 
+import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 
 import { Camera } from '@ionic-native/camera/ngx';
 import { AppRoutingModule } from './app-routing.module';
@@ -40,6 +41,7 @@ import { environment } from 'src/environments/environment';
     Camera,
     Clipboard,
     SocialSharing,
+    QRScanner
 
   ],
   bootstrap: [AppComponent],

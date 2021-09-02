@@ -1,5 +1,11 @@
 .div_content{
     padding: 10px 6.25vw;
+    .pre_load{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+    }
     .books{
         margin-top: 30px;
         .book{
@@ -27,6 +33,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    color: var(--ion-color-light);
                 }
 
                 .moreIcon{
