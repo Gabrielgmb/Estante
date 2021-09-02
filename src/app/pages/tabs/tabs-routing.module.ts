@@ -13,7 +13,7 @@ const routes: Routes = [
       },
       {
         path: 'tab2',
-        loadChildren: () => import('../qrcode/qrcode.module').then( m => m.QrcodePageModule)
+        loadChildren: () => import('../reader/reader.module').then( m => m.ReaderPageModule)
       },
       {
         path: 'tab3',
