@@ -1,7 +1,21 @@
 <ion-content>
-  <ion-row class="ion-justify-content-center">
-    <ion-button (click)="activeReader()" expand="block" class="btn-confirm">
-     teste
-    </ion-button>
-  </ion-row>
+  <div class="content_div">
+    <ion-row class="ion-justify-content-center">
+      <ion-button (click)="activeReader()" expand="block" class="btn-confirm">
+        <span class="iconify" data-icon="bi:upc-scan"></span>
+       Leitor de QRcode
+      </ion-button>
+    </ion-row>
+    <ion-label class="ou">OU</ion-label>
+  
+    <ion-item class="item-input ion-no-padding">
+      <ion-input type="text" placeholder="Coloque o código do livro aqui" [(ngModel)]="qrcode"></ion-input>
+    </ion-item>
+    <ion-row class="ion-justify-content-center">
+      <ion-button (click)="getBook(qrcode)" [disabled]="!qrcode" color="secondary" class="btn-confirm">
+       Continuar
+      </ion-button>
+    </ion-row>
+  </div>
+  
 </ion-content>

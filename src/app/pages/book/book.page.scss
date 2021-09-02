@@ -25,29 +25,22 @@
             font-size: 1.625rem;
         }
     }
-    .form_div{
-        margin-top: 20px;
-        .item-input{
-            --highlight-background: var(--ion-color-primary);
-            --background: none;
-            --inner-padding-end:0;
-            --border-color:var(--ion-color-primary);
-            ion-input{
-                color: var(--ion-color-dark);
-                font-size: 1rem;
-            }
-            ion-select{
-                color: var(--ion-color-dark);
-                font-size: 1rem;
-            }
-            ion-select::part(icon) {
-                display: none !important;
-            }
-            ion-label{
-                color: var(--ion-color-dark);
-                font-family: Bold!important;
+    .data_book{
+        margin-top: 40px;
+        .data{
+            border-bottom: 1px solid lightgray;
+            padding: 10px 0 5px 0;
+            font-size: 1rem;
+            color: gray;
+            .title{
+                font-family: Bold !important;
                 font-size: 0.875rem;
+                margin-bottom: 5px;
+                color: black;
             }
+        }
+        .data:last-child{
+            border-bottom: 0px;
         }
     }
 }

@@ -75,8 +75,8 @@ export class AddBookPage implements OnInit {
   }
 
   create() {
-    if (this.book.name === '' ||  this.book.cid === '' || this.book.buy === 0 || this.book.sell === 0 || this.book.desc === '' ||
-    !this.book.name ||!this.book.cid ||!this.book.buy ||!this.book.sell ||!this.book.desc ) {
+    if (this.book.name === '' || this.book.cover === 'assets/add-book-icon.jpg' ||  this.book.cid === '' || this.book.buy === 0 || this.book.sell === 0 || this.book.desc === '' ||
+    !this.book.name ||!this.book.cover || !this.book.cid ||!this.book.buy ||!this.book.sell ||!this.book.desc ) {
     this.util.showToast('Todos os campos são obrigatorios', 'danger', 'bottom');
     return false;
     }

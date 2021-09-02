@@ -12,6 +12,7 @@ import { NavController, Platform } from '@ionic/angular';
 })
 export class ReaderPage implements OnInit {
   qrScan:any;
+  qrCode:any;
   constructor(
     private QR: QRScanner,
     private api: ApiService,
@@ -52,15 +53,20 @@ export class ReaderPage implements OnInit {
   }
 
   getBook(code){
-    this.util.showToast(code, 'success', 'bottom');
     var split =atob(code).split('-')
-    const navData: NavigationExtras = {
-      queryParams: {
-        uid: split[0],
-        id:split[1]
-      }
-    };
-    this.router.navigate(['book'], navData);
+    if(split[0].length==28 &&split[1].length==15){
+      this.util.showToast('Codigo lido com sucesso', 'success', 'bottom');
+      const navData: NavigationExtras = {
+        queryParams: {
+          uid: split[0],
+          id:split[1]
+        }
+      };
+      this.router.navigate(['book'], navData);
+    }else{
+      this.util.showToast('Codigo inválido', 'success', 'bottom');
+    }
+    
   }
 
 }

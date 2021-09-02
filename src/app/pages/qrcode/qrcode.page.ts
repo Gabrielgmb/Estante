@@ -32,10 +32,10 @@ export class QrcodePage implements OnInit {
   }
 
   share(){
-    this.socialSharing.share('qrcode');
+    this.socialSharing.share(this.qrcode);
   }
 
   copyCode(){
-    this.clipboard.copy('Hello world');
+    this.clipboard.copy(this.qrcode);
   }
 }

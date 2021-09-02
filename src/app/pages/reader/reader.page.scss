@@ -1,0 +1,22 @@
+.content_div{
+    padding: 0px 6.25vw;
+    .ou{
+        text-align: center;
+        font-size: 1rem;
+    }
+    .item-input{
+        --highlight-background: var(--ion-color-primary);
+        --background: none;
+        --inner-padding-end:0;
+        --border-color:var(--ion-color-primary);
+        ion-input{
+            color: var(--ion-color-dark);
+            font-size: 1rem;
+        }
+        ion-label{
+            color: var(--ion-color-dark);
+            font-family: Bold!important;
+            font-size: 0.875rem;
+        }
+    }
+}
